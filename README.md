@@ -57,3 +57,25 @@ Specification served at UI availble at `localhost:3000/swagger.yaml`
 Update the `swagger/swagger.yaml` file containing an openapi 3.0 or swagger 2.0 specification of the API.
 
 NOTE: The online swagger editor `http://editor.swagger.io/` can occasionally report errors for a correct yaml file. If you get an error that doesn't make sense, just reload the editor page.
+
+
+
+POST:
+curl -i -X POST -H "Content-Type:application/json" "http://localhost:3000/books" -d '{"ISBN":"9780321877581","Title":"Essential C#5.0","Author":"Mark Michaelis","Price":"59.99","SellerEmail":"someone@someplace.com","Used":true,"Location":{"City":"Redmond","Street":"156TH AVE NE"}}'
+
+DELETE:
+curl -i -X DELETE "http://localhost:3000/books/_id"
+
+GET:
+curl -i "http://localhost:3000/books"
+
+GET ONE:
+curl -i "http://localhost:3000/books/_id"
+
+GET QUERY:
+curl - i "http://localhost:3000/books?Title=Book"
+
+PUT:
+curl -i -X PUT -H "Content-Type:application/json" "http://localhost:3000/books/5ec380dbeb26ab99f16bd68e" -d '{"ISBN":"9780321877581","Title":"One Book","Author":"Mark Michaelis","Price":"59.99","SellerEmail":"someone@someplace.com","Used":true,"Location":{"City":"Redmond","Street":"156TH AVE NE"}}'
+
+

@@ -28,11 +28,141 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+    post:
+      summary: Create a book
+      operationId: createBook
+      tags:
+        - books
+      requestBody:
+        description: the book to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          description: Book created
+          content:
+            application/json:    
+              schema:
+                $ref: '#/components/schemas/ResponseBook'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /books/{bookId}:
+    get:
+      summary: Get one book
+      operationId: getBook
+      tags:
+        - books
+      parameters:
+        - name: bookId
+          required: true
+          in: path
+          description: The id of the book to show
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseBook"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a book
+      operationId: deleteBook
+      tags:
+        - books
+      parameters:
+        - name: bookId
+          required: true
+          in: path
+          description: The id of the book to delete
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseBook"
+        '204':
+          description: No change (nothing was deleted)
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Update a book
+      operationId: updateBook
+      tags:
+        - books
+      requestBody:
+        description: the book to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      parameters:
+        - name: bookId
+          required: true
+          in: path
+          description: The id of the book to update
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseBook"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 components:
   schemas:
     Book: # A single book
       type: object
       properties:
+        ISBN: 
+          type: integer
+        Title:
+          type: string
+        Author:
+          type: string
+        Price:
+          type: integer
+        SellerEmail:
+          type: string
+        Used:
+          type: boolean
+        Location: 
+          type: object
+          properties:
+            City: 
+              type: string
+            Street:
+              type: string
+        
 # Add properties for your books here   
     ResponseBook: #Single book response including _id and __v
       allOf:
