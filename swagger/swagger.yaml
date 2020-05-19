@@ -127,7 +127,19 @@ paths:
             type: string
       responses:
         '200':
-          description: Expected response to a valid request
+          description: Expected response to a valid request (updated)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseBook"
+        '201':
+          description: Expected response to a valid request (created)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseBook"
+        '204':
+          description: No change
           content:
             application/json:
               schema:
@@ -144,13 +156,13 @@ components:
       type: object
       properties:
         ISBN: 
-          type: integer
+          type: string
         Title:
           type: string
         Author:
           type: string
         Price:
-          type: integer
+          type: number
         SellerEmail:
           type: string
         Used:

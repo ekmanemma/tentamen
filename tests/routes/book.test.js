@@ -93,7 +93,7 @@ describe('Book Integration tests', () => {
 		it('Should get a book by id', (done) => {
 
 			mock
-			.expects('find')
+			.expects('findOne')
 			.withArgs({_id: "5ec3821c50c556787d4ed79d"})
 			.chain('exec')
 			.resolves(expected);
@@ -152,6 +152,27 @@ describe('Book Integration tests', () => {
 			.send(request)
 			.end((err,res) => {
 				expect(res.status).to.equal(200);
+				done();
+			});
+		});
+
+		it('Should return 204 when not updating a student', (done) => {
+			// Given (preconditions)
+			mock
+			.expects('updateOne')
+			.withArgs({ _id: "5ec3821c50c556787d4ed79d" }, request)
+			.chain('exec')
+			.resolves({ n: 1,
+				nModified: 0,
+				ok: 1 });
+
+			// When (someting happens)
+			agent
+			.put('/books/5ec3821c50c556787d4ed79d')
+			.send(request)
+			.end((err,res) => {
+			// Then (something should happen)
+				expect(res.status).to.equal(204);
 				done();
 			});
 		});

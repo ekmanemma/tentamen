@@ -48,7 +48,7 @@ deleteBook = (req, res, next) => {
 getOneBook = (req, res, next) => {
   let search = {};
   search = {_id: req.params.id}
-  req.models.Book.find(search).then((book) =>{
+  req.models.Book.findOne(search).then((book) =>{
     return res.send(book)
   }).catch((error) =>{
     next(error)
